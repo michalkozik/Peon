@@ -25,7 +25,7 @@ describe('chat provider factory', () => {
       supportsReasoning: true,
     });
     expect(config).toMatchObject({ provider: 'openai', modelId: 'gpt-5.6-sol' });
-    expect(model).toMatchObject({ modelId: 'gpt-5.6-sol' });
+    expect(model).toMatchObject({ modelId: 'openai/gpt-5.6-sol' });
     expect(provider.providerOptions(config)).toEqual({
       openai: {
         reasoningEffort: 'medium',

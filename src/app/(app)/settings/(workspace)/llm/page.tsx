@@ -20,8 +20,8 @@ import type { LlmProviderId } from '@/services/api/llm';
 const PROVIDERS: Array<{ id: LlmProviderId; label: string; hint: string }> = [
   {
     id: 'openai',
-    label: 'OpenAI',
-    hint: 'API key from platform.openai.com',
+    label: 'OpenRouter',
+    hint: 'OpenRouter API key from openrouter.ai/settings/keys',
   },
   {
     id: 'anthropic',
@@ -61,7 +61,8 @@ export default function LlmSettingsPage() {
     try {
       await upsert.mutateAsync({ provider, apiKey });
       setDraftKeys((prev) => ({ ...prev, [provider]: '' }));
-      toast.success(`${provider === 'openai' ? 'OpenAI' : 'Anthropic'} key saved`);
+      const providerLabel = provider === 'openai' ? 'OpenRouter' : 'Anthropic';
+      toast.success(`${providerLabel} key saved`);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Could not save key');
     }
@@ -179,7 +180,9 @@ export default function LlmSettingsPage() {
                       placeholder={
                         status?.configured
                           ? 'Enter a new key to replace the saved one'
-                          : 'sk-…'
+                          : provider.id === 'openai'
+                            ? 'sk-or-v1-…'
+                            : 'sk-ant-…'
                       }
                       value={draftKeys[provider.id]}
                       onChange={(event) =>
