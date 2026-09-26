@@ -25,7 +25,7 @@ function selectionKey(selection: ModelSelection): string {
 }
 
 function providerLabel(provider: LlmProviderId): string {
-  return provider === 'openai' ? 'OpenAI' : 'Anthropic';
+  return provider === 'openai' ? 'OpenRouter' : 'Anthropic';
 }
 
 export function ModelPicker({
@@ -111,7 +111,7 @@ export function ModelPicker({
           <CommandList className="max-h-64">
             <CommandEmpty>No models found</CommandEmpty>
             {openai.length > 0 && (
-              <CommandGroup heading="OpenAI">{openai.map(renderModelItem)}</CommandGroup>
+              <CommandGroup heading="OpenRouter">{openai.map(renderModelItem)}</CommandGroup>
             )}
             {anthropic.length > 0 && (
               <CommandGroup heading="Anthropic">{anthropic.map(renderModelItem)}</CommandGroup>
